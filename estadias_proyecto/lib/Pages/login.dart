@@ -10,7 +10,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.grey,
+      backgroundColor:Colors.grey[50],
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: 30.0,
@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               CircleAvatar(
                 radius: 100.0,
-                backgroundColor:Colors.grey,
+                backgroundColor:Colors.grey[50],
                 backgroundImage: AssetImage('images/img.png'),
               ),
               Text(
@@ -40,7 +40,51 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.grey[900],
                 )
               ),
-              
+              TextField(
+                enableInteractiveSelection: false,
+                autofocus: true,
+                textCapitalization: TextCapitalization.characters,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  labelText: 'Email',
+                  suffixIcon:Icon(
+                      Icons.verified_user
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0)
+                  ),
+                ),             
+              ),
+              SizedBox(
+                width: 10.0,
+                height:15.0,
+              ),
+              TextField(
+                enableInteractiveSelection: false,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  labelText: 'Password',
+                  suffixIcon:Icon(
+                    Icons.lock_outline
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  )
+                ),
+              ),
+              Divider(
+                height: 15.0,
+              ),
+              SizedBox(
+                child: 
+                FlatButton(
+                  hoverColor: Colors.cyan,
+                  onPressed: (){},
+                  child: const Text('INICIAR'),
+                  color: Colors.cyan[600],
+                ),
+              )
             ],
           )
         ],
