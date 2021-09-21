@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'Pages/login.dart';
+import 'package:qrscaner/src/login.dart';
+
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login',
+      title: 'hello',
       home: LoginPage(),
     );
   }

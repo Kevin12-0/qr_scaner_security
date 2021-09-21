@@ -20,6 +20,9 @@
       <excludeFolder url="file://$MODULE_DIR$/estadias_proyecto/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/estadias_proyecto/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/estadias_proyecto/build" />
+      <excludeFolder url="file://$MODULE_DIR$/qrscaner/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/qrscaner/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/qrscaner/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
