@@ -10,9 +10,23 @@ class _DataReadState extends State<DataRead> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        
-      ],),
+      body: FutureBuilder<Object>(
+        future: getDatos(),
+        builder: (context, snapshot){
+          return Column(
+            children: [
+
+            ],
+          );
+        }
+      ),
     );
   }
+
+  List <Data> getDatos() {
+
+  }
+}
+
+class Data {
 }
