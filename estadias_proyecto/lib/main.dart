@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase/supabase.dart';
+import 'Pages/data.dart';
 import 'Pages/login.dart';
 
 const supabaseUrl = 'https://btuoufefhitjxkokehcv.supabase.co';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login',
-      home: LoginPage(),
+      home: DataRead(),
     );
   }
 }
