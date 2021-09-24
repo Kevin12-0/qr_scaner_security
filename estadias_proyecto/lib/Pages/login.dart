@@ -18,20 +18,23 @@ class _LoginPageState extends State<LoginPage> {
         ),
         children: <Widget>[
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center, //centrar los elementos 
             children: [
+              // imagen de logo
               CircleAvatar(
                 radius: 100.0,
                 backgroundColor:Colors.grey[50],
                 backgroundImage: AssetImage('images/img.png'),
               ),
+              // texto de inico de sesión
               Text(
                 'INICIAR SESION',
-                style: TextStyle(
-                  fontFamily: 'Linebeam',
-                  fontSize: 25.0
+                style: TextStyle( //estilo
+                  fontFamily: 'Linebeam', 
+                  fontSize: 25.0 //tamaño
                 ),
               ),
+              // linea del logo
               SizedBox(
                 width:160.0,
                 height:15.0,
@@ -40,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.grey[900],
                 )
               ),
+              // text field para el usuario o email
               TextField(
                 enableInteractiveSelection: false,
                 autofocus: true,
@@ -59,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: 10.0,
                 height:15.0,
               ),
+              // text field para contraseña
               TextField(
                 enableInteractiveSelection: false,
                 obscureText: true,
@@ -78,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(
                 child: 
+                // botton de para iniciar sesion
                 FlatButton(
                   hoverColor: Colors.cyan,
                   onPressed: (){},

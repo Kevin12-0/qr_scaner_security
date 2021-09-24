@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   supabase: ^0.2.6
+  injector: ^2.0.0
   flutter:
     sdk: flutter
 
