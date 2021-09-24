@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 enableInteractiveSelection: false,
                 autofocus: true,
-                textCapitalization: TextCapitalization.characters,
+                textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   labelText: 'Email',

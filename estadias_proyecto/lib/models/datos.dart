@@ -1,13 +1,13 @@
 class Datos {
   String Name;
-  String Apellidos;
+  String Apelliddos;
 
-  Datos({this.Name, this.Apellidos});
+  Datos({this.Name, this.Apelliddos});
 
   factory Datos.fromJSON(Map<String, dynamic> map) { 
     return Datos(
       Name : map['Name'],
-      Apellidos : map['Apellidos']
+      Apelliddos : map['Apelliddos']
     );
   }
 }

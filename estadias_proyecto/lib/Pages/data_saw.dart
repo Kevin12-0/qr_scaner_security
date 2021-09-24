@@ -14,14 +14,21 @@ class _DataSawState extends State<DataSaw> {
         body: FutureBuilder<List<Datos>>(
             future: getData(),
             builder: (context, snapshot) {
+              if(snapshot.hasData == false) {
+                return CircularProgressIndicator();
+              }
               return ListView(
-                children: snapshot.data
-                    .map((datos) => ListTile(
-                        title: Text(datos.Name),
-                        subtitle: Text(datos.Apellidos)))
+                children: newMethod(snapshot)
                     .toList(),
               );
             }));
+  }
+
+  Iterable<ListTile> newMethod(AsyncSnapshot<List<Datos>> snapshot) {
+    return snapshot.data
+                  .map((Datos) => ListTile(
+                      title: Text(Datos.Name),
+                      subtitle: Text(Datos.Apelliddos)));
   }
 
   Future<List<Datos>> getData() async {
