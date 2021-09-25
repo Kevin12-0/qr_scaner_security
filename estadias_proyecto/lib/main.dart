@@ -3,7 +3,8 @@ import 'package:injector/injector.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'Pages/data_saw.dart';
-import 'Pages/login.dart';
+import 'Pages/login_page.dart';
+
 
 void main() {
   const supabaseUrl = 'https://btuoufefhitjxkokehcv.supabase.co';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login',
-      home: DataSaw(),
+      home: LoginPage(),
     );
   }
 }
