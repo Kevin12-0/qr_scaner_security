@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _login() async {
+  Future _login() async {
     await Injector.appInstance.get<SupabaseClient>().auth.signIn(
       email: _email.text,
       password: _password.text
