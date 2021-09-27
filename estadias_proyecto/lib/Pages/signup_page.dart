@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key}) : super(key: key);
@@ -11,6 +13,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _email;
   TextEditingController _password;
   TextEditingController _confirmpassword;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -23,21 +26,35 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: Form(
+      key: _formKey,
+      child: Column(
         children: [
           CircleAvatar(
             radius: 100.0,
             backgroundColor: Colors.grey[50],
             backgroundImage: AssetImage('images/img.png'),
           ),
-          TextField(
+          TextFormField(
               controller: _email,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Inserte un email correcto';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                   hintText: 'Email',
                   labelText: 'Email',
                   suffixIcon: Icon(Icons.verified_user))),
-          TextField(
+          TextFormField(
               controller: _password,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Inserte una contraseña valida';
+                }
+                return null;
+              },
               enableInteractiveSelection: false,
               obscureText: true,
               decoration: InputDecoration(
@@ -47,8 +64,19 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ))),
-          TextField(
+          TextFormField(
             controller: _confirmpassword,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Inserte una contraseña valida';
+              // ignore: missing_return
+              }
+              // ignore: missing_return
+              if (value != _password.text) {
+                return 'Contraseña invalida';
+              }
+              return null;
+            },
             enableInteractiveSelection: false,
             obscureText: true,
             decoration: InputDecoration(
@@ -59,9 +87,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   borderRadius: BorderRadius.circular(20.0),
                 )),
           ),
+          ElevatedButton(
+            child: Text('Sing Up'),
+            onPressed: _signup,
+          )
         ],
       ),
-    );
+    ));
+  }
+
+  Future _signup() async {
+    if (_formKey.currentState.validate()){
+
+    }
   }
 }
-
