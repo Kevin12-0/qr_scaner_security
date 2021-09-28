@@ -69,7 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Inserte una contraseña valida';
-              // ignore: missing_return
+                // ignore: missing_return
               }
               // ignore: missing_return
               if (value != _password.text) {
@@ -97,8 +97,12 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future _signup() async {
-    if (_formKey.currentState.validate()){
 
+    if (_formKey.currentState.validate()) {
+      await Injector.appInstance
+          .get<SupabaseClient>()
+          .auth
+          .signUp(_email.text, _password.text);
     }
   }
 }

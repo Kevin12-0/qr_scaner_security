@@ -3,6 +3,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 
 import 'data_saw.dart';
+import 'login_page.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
@@ -12,21 +13,22 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  
   @override
   void initState() {
     super.initState();
-    final supabaseClient = Injector.appInstance.get<SupabaseClient>();
-    final user = supabaseClient.auth.user();
-
     // redireccion al login
-    if (user == null) {
-      
-    }else{
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) => DataSaw()
-      ));
-    }
+    Future.microtask(() async {
+      await Future.delayed(Duration(seconds: 10));
+      final supabaseClient = Injector.appInstance.get<SupabaseClient>();
+      final user = supabaseClient.auth.user();
+      if (user == null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => DataSaw()));
+      }
+    });
   }
 
   @override
@@ -36,6 +38,5 @@ class _SplashPageState extends State<SplashPage> {
         child: CircularProgressIndicator(),
       ),
     );
-
   }
 }

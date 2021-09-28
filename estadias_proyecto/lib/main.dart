@@ -4,6 +4,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'Pages/data_saw.dart';
 import 'Pages/login_page.dart';
+import 'Pages/splash_page.dart';
 
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login',
-      home: LoginPage(),
+      home: SplashPage(),
     );
   }
 }
