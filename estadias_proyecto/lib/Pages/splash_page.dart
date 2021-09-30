@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     // redireccion al login
     Future.microtask(() async {
-      await Future.delayed(Duration(seconds: 10));
+      await Future.delayed(Duration(seconds: 2));
       final supabaseClient = Injector.appInstance.get<SupabaseClient>();
       final user = supabaseClient.auth.user();
       if (user == null) {

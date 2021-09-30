@@ -30,10 +30,18 @@ class _SignUpPageState extends State<SignUpPage> {
       key: _formKey,
       child: Column(
         children: [
+          SizedBox(
+            width: 20,
+            height: 20,
+          ),
           CircleAvatar(
             radius: 100.0,
             backgroundColor: Colors.grey[50],
             backgroundImage: AssetImage('images/img.png'),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
           ),
           TextFormField(
               controller: _email,
@@ -46,7 +54,13 @@ class _SignUpPageState extends State<SignUpPage> {
               decoration: InputDecoration(
                   hintText: 'Email',
                   labelText: 'Email',
-                  suffixIcon: Icon(Icons.verified_user))),
+                  suffixIcon: Icon(Icons.verified_user),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0)))),
+          SizedBox(
+            width: 20,
+            height: 20,
+          ),
           TextFormField(
               controller: _password,
               validator: (value) {
@@ -64,6 +78,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ))),
+          SizedBox(
+            width: 20,
+            height: 20,
+          ),
           TextFormField(
             controller: _confirmpassword,
             validator: (value) {
@@ -97,7 +115,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future _signup() async {
-
     if (_formKey.currentState.validate()) {
       await Injector.appInstance
           .get<SupabaseClient>()
