@@ -27,6 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Form(
+
       key: _formKey,
       child: Column(
         children: [

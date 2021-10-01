@@ -16,30 +16,40 @@ class _DataSawState extends State<DataSaw> {
         body: FutureBuilder<List<Datos>>(
             future: getData(),
             builder: (context, snapshot) {
-              if(snapshot.hasData == false) {
-                return CircularProgressIndicator();
+              if (snapshot.hasData == false) {
+                return Center(
+                    child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                ));
               }
-              return ListView(
-                children: newMethod(snapshot)
-                    .toList(),
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 500,
+                      child: ListView(
+                        children: snapshot.data
+                            .map((Datos) => ListTile(
+                                title: Text(Datos.Name),
+                                subtitle: Text(Datos.Apelliddos)))
+                            .toList(),
+                      ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {}, child: Text('Cerrar Sesión'))
+                  ],
+                ),
               );
             }));
   }
 
-  Iterable<ListTile> newMethod(AsyncSnapshot<List<Datos>> snapshot) {
-    return snapshot.data
-                  .map((Datos) => ListTile(
-                      title: Text(Datos.Name),
-                      subtitle: Text(Datos.Apelliddos)));
-  }
-
   Future<List<Datos>> getData() async {
     final response = await Injector.appInstance
-      .get<SupabaseClient>()
-      .from('registros')
-      .select()
-      .order('Name', ascending: true)
-      .execute();
+        .get<SupabaseClient>()
+        .from('registros')
+        .select()
+        .order('Name', ascending: true)
+        .execute();
 
     final datalist = response.data as List;
     return datalist.map((map) => Datos.fromJSON(map)).toList();
