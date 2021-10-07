@@ -1,5 +1,7 @@
+import 'package:estadias_proyecto/Pages/signup_page.dart';
+import 'package:estadias_proyecto/Pages/splash_page.dart';
 import 'package:estadias_proyecto/main.dart';
-import 'package:estadias_proyecto/models/datos.dart';
+import 'package:estadias_proyecto/models/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -10,48 +12,72 @@ class DataSaw extends StatefulWidget {
 }
 
 class _DataSawState extends State<DataSaw> {
+  List<Todo> todos = [];
+
+  void initState() {
+    super.initState();
+    Future.microtask(() async {
+      final _todos = await getInitialTodos();
+      setState(() {
+        todos = _todos;
+      });
+      setupTodosSusciptions();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<List<Datos>>(
-            future: getData(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData == false) {
-                return Center(
-                    child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-                ));
-              }
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      height: 500,
-                      child: ListView(
-                        children: snapshot.data
-                            .map((Datos) => ListTile(
-                                title: Text(Datos.Name),
-                                subtitle: Text(Datos.Apelliddos)))
-                            .toList(),
-                      ),
-                    ),
-                    ElevatedButton(
-                        onPressed: () {}, child: Text('Cerrar Sesión'))
-                  ],
-                ),
-              );
-            }));
+        body: SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: 500,
+            child: ListView(
+              children: todos
+                  .map((todo) => ListTile(
+                      leading:
+                          Icon(todo.isComplete ? Icons.check : Icons.check_box),
+                      title: Text(todo.task)))
+                  .toList(),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await Injector.appInstance.get<SupabaseClient>().auth.signOut();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => SplashPage()),
+                  (route) => false);
+            },
+            child: Text('Cerrar Sesión'),
+          ),
+        ],
+      ),
+    ));
   }
 
-  Future<List<Datos>> getData() async {
+  Future<List<Todo>> getInitialTodos() async {
     final response = await Injector.appInstance
         .get<SupabaseClient>()
-        .from('registros')
+        .from('todos')
         .select()
-        .order('Name', ascending: true)
+        .order('inserted_at', ascending: false)
         .execute();
 
     final datalist = response.data as List;
-    return datalist.map((map) => Datos.fromJSON(map)).toList();
+    return datalist.map((map) => Todo.fromJSON(map)).toList();
+  }
+
+  void setupTodosSusciptions() {
+    todosSubscription = Injector.appInstance
+        .get<SupabaseClient>()
+        .from('todos')
+        .on(SupabaseEventTypes.insert, (payload) {
+      final todo = Todo.fromJSON(payload.newRecord);
+      setState(() {
+        todos = [todo, ...todos];
+      });
+    }).subscribe();
   }
 }

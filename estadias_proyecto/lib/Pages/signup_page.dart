@@ -3,7 +3,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({Key key}) : super(key: key);
+
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -27,18 +27,12 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Form(
-
       key: _formKey,
       child: Column(
         children: [
           SizedBox(
             width: 20,
             height: 20,
-          ),
-          CircleAvatar(
-            radius: 100.0,
-            backgroundColor: Colors.grey[50],
-            backgroundImage: AssetImage('images/img.png'),
           ),
           SizedBox(
             width: 20,
