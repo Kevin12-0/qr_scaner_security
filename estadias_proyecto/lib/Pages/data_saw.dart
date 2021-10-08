@@ -1,6 +1,5 @@
-import 'package:estadias_proyecto/Pages/signup_page.dart';
+
 import 'package:estadias_proyecto/Pages/splash_page.dart';
-import 'package:estadias_proyecto/main.dart';
 import 'package:estadias_proyecto/models/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
@@ -13,7 +12,9 @@ class DataSaw extends StatefulWidget {
 
 class _DataSawState extends State<DataSaw> {
   List<Todo> todos = [];
+  RealtimeSubscription todosSusciptions;
 
+  @override
   void initState() {
     super.initState();
     Future.microtask(() async {
@@ -62,7 +63,7 @@ class _DataSawState extends State<DataSaw> {
         .get<SupabaseClient>()
         .from('todos')
         .select()
-        .order('inserted_at', ascending: false)
+        .order('inserted_at', ascending: true)
         .execute();
 
     final datalist = response.data as List;
@@ -70,7 +71,7 @@ class _DataSawState extends State<DataSaw> {
   }
 
   void setupTodosSusciptions() {
-    todosSubscription = Injector.appInstance
+    todosSusciptions = Injector.appInstance
         .get<SupabaseClient>()
         .from('todos')
         .on(SupabaseEventTypes.insert, (payload) {

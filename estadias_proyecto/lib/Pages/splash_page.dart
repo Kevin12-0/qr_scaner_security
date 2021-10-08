@@ -6,7 +6,6 @@ import 'data_saw.dart';
 import 'login_page.dart';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();

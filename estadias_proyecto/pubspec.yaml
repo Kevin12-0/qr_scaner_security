@@ -21,7 +21,7 @@ environment:
   sdk: ">=2.11.0 <3.0.0"
 
 dependencies:
-  supabase: ^0.2.6
+  supabase: ^0.2.7
   injector: ^2.0.0
   flutter:
     sdk: flutter
