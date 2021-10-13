@@ -25,6 +25,26 @@ class _DataSawState extends State<DataSaw> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = Injector.appInstance.get<SupabaseClient>().auth.user();
+
+    final todoWidgets = todos
+        .map((todo) => ListTile(
+              leading: Checkbox(
+                  value: todo.isComplete,
+                  onChanged: todo.userId == currentUser.id
+                      ? (isComplete) async {
+                          await updatedTodo(todo, isComplete);
+                        }
+                      : null),
+              trailing: todo.userId == currentUser.id
+                  ? IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () => deleteTodo(todo.id),
+                    )
+                  : null,
+              title: Text(todo.task),
+            ))
+        .toList();
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -34,8 +54,15 @@ class _DataSawState extends State<DataSaw> {
             child: ListView(
               children: todos
                   .map((todo) => ListTile(
-                      leading:
-                          Icon(todo.isComplete ? Icons.check : Icons.check_box),
+                      leading: Checkbox(
+                          value: todo.isComplete,
+                          onChanged: (isComplete) async {
+                            await updatedTodo(todo, isComplete);
+                          }),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () => deleteTodo(todo.id),
+                      ),
                       title: Text(todo.task)))
                   .toList(),
             ),
@@ -50,9 +77,42 @@ class _DataSawState extends State<DataSaw> {
             },
             child: Text('Cerrar Sesión'),
           ),
+          SizedBox(
+            width: 20,
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => DataSaw()),
+                  (route) => false);
+            },
+            child: Text('Actualizar'),
+          )
         ],
       ),
     ));
+  }
+
+  Future deleteTodo(int todoId) async {
+    await Injector.appInstance
+        .get<SupabaseClient>()
+        .from('todos')
+        .delete()
+        .eq('id', todoId)
+        .execute();
+  }
+
+  Future updatedTodo(Todo updatedTodo, bool isComplete) async {
+    await Injector.appInstance
+        .get<SupabaseClient>()
+        .from('todos')
+        .update({'is_complete': isComplete})
+        .eq('id', updatedTodo.id)
+        .execute();
+    setState(() {
+      updatedTodo.isComplete = isComplete;
+    });
   }
 
   Future<List<Todo>> getInitialTodos() async {
@@ -71,8 +131,23 @@ class _DataSawState extends State<DataSaw> {
     todosSubscription = Injector.appInstance
         .get<SupabaseClient>()
         .from('todos')
-        .on(SupabaseEventTypes.update, (payload) {})
-        .on(SupabaseEventTypes.insert, (payload) {
+        .on(SupabaseEventTypes.delete, (payload) {
+      final deleteId = payload.oldRecord['id'];
+      setState(() {
+        todos = todos.where((t) => t.id != deleteId).toList();
+      });
+    }).on(SupabaseEventTypes.update, (payload) {
+      final updatedTodo = Todo.fromJSON(payload.newRecord);
+      final todo =
+          todos.firstWhere((t) => t.id == updatedTodo, orElse: () => null);
+      if (todo == null) {
+        setState(() {
+          todos = [todo, ...todos];
+        });
+      } else {
+        todo.isComplete = updatedTodo.isComplete;
+      }
+    }).on(SupabaseEventTypes.insert, (payload) {
       final todo = Todo.fromJSON(payload.newRecord);
       setState(() {
         todos = [todo, ...todos];
