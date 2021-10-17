@@ -23,6 +23,9 @@
       <excludeFolder url="file://$MODULE_DIR$/qrscaner/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/qrscaner/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/qrscaner/build" />
+      <excludeFolder url="file://$MODULE_DIR$/scannercartus/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/scannercartus/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/scannercartus/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
