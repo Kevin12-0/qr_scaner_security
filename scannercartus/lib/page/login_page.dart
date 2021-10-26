@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
-
+import 'splash_page.dart';
 import 'home_page.dart';
 import 'signuo_page.dart';
 
@@ -87,6 +87,9 @@ class _LoginPageState extends State<LoginPage> {
         .auth
         .signIn(email: _email.text, password: _password.text);
     if (signInResult != null && signInResult.user != null) {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.setString(
+          persistentSessionKey, signInResult.data.persistSessionString);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => DataSaw()));
     } else if (signInResult.error.message != null) {
