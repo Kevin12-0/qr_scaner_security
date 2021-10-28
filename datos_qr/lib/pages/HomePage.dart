@@ -1,42 +1,51 @@
 import 'package:flutter/material.dart';
+import 'QrCode.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late TextEditingController _nombre;
-  late TextEditingController _apellido;
-
-  void initState() {
-    super.initState();
-
-    _nombre = TextEditingController();
-    _apellido = TextEditingController();
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: ListView(
-          padding: EdgeInsets.symmetric(
-            horizontal: 30,
-            vertical: 90,
-          ),
+    TextEditingController _nombre = TextEditingController(text: '');
+    TextEditingController _apellido = TextEditingController(text: '');
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Datos codigo')),
+      body: ListView(
         children: [
           SizedBox(
-            width: 25,
+            height: 20,
           ),
-          TextField(
-            controller: _nombre,
+          Column(
+            children: [
+              TextField(
+                  controller: _nombre,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0)))),
+              SizedBox(
+                height: 20,
+                width: 15,
+              ),
+              TextField(
+                  controller: _apellido,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0)))),
+            ],
           ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Qr_Code(_nombre.text, _apellido.text )));
+              },
+              child: const Text('Enviar Datos')),
         ],
-        ),
-        
       ),
     );
   }
