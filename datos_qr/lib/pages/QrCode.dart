@@ -4,11 +4,20 @@ import 'package:qr_flutter/qr_flutter.dart';
 class Qr_Code extends StatelessWidget {
   final String nombre;
   final String apellido;
-  const Qr_Code(this.nombre, this.apellido, {Key? key}) : super(key: key);
+  final String descripcion;
+  final String calle;
+
+  const Qr_Code(this.nombre, this.apellido, this.descripcion, this.calle, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var nombreCompleto = 'Nombre: ' + nombre + "\nApellido: " + apellido;
+    var nombreCompleto = 'Nombre: ' +
+        nombre +
+        "\nApellido: " +
+        apellido +
+        "\nDescripción: " +
+        descripcion + "\nCalle: " + calle;
     return Scaffold(
       appBar: AppBar(title: const Text('Generar')),
       body: Center(
