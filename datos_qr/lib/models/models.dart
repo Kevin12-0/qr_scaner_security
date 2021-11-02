@@ -25,8 +25,9 @@ class SupabaseInserts {
       'Lote': loteVale,
       'Telefono': telefonoValue,
       'Motivo de la Visita': motivoVlue,
-      'No.Acompañantes': acompanantesValue,
+      'No. Acompañantes': acompanantesValue,
       'Nombre Autorización': autorizacionValue
     }).execute();
+    print(response);
   }
 }

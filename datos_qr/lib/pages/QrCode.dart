@@ -16,8 +16,8 @@ class Qr_Code extends StatelessWidget {
   //this.nombre, this.apellido, this.descripcion, this.calle,
 
   const Qr_Code(
-      this.nombrevisita,
       this.fecha,
+      this.nombrevisita,
       this.calle,
       this.colonia,
       this.lote,
