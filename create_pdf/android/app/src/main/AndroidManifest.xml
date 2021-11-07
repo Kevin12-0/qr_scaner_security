@@ -1,11 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.scanner_codigos_qr">
-
-   <uses-permission android:name="android.permission.CAMERA" />
-   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    package="com.example.create_pdf">
    <application
-        android:label="scanner_codigos_qr"
+        android:label="create_pdf"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
