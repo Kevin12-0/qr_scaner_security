@@ -1,10 +1,9 @@
 import 'package:supabase/supabase.dart';
 
 class SupabaseInserts {
-  static String supabaseURL = 'https://btuoufefhitjxkokehcv.supabase.co';
+  static String supabaseURL = 'https://tngqweyzsoryyeewfxdq.supabase.co';
   static String supabaseAPI =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjA4ODg2NiwiZXhwIjoxOTQ3NjY0ODY2fQ.ZiTSw9IpT6xK1cuamn5UnViCvzprpl0nQX1QOtouwZo';
-
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNzAyMjQ1MCwiZXhwIjoxOTUyNTk4NDUwfQ.Vr_NbYgJorKZSoLmgfpwEc7igYfm5a6HmHc5Idc1ewA';
   final client = SupabaseClient(supabaseURL, supabaseAPI);
 
   addData(
