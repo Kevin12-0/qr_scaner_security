@@ -6,8 +6,8 @@ class Qr_Code extends StatelessWidget {
   final String fecha;
   final String nombrevisita;
   final String calle;
-  final String lote;
   final String colonia;
+  final String lote;
   final String telefono;
   final String motivo;
   final String acompaniantes;
@@ -30,23 +30,23 @@ class Qr_Code extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var codigo_qr = 'Fecha: ' +
+    var codigo_qr = 'Fecha: \n' +
         fecha +
-        '\nNombre de la visita: ' +
+        '\nNombre de la visita:\n ' +
         nombrevisita +
-        '\nCalle: ' +
+        '\nCalle: \n' +
         calle +
-        '\nColonia: ' +
+        '\nFraccionamiento: \n' +
         colonia +
-        '\nLote: ' +
+        '\nLote: \n' +
         lote +
-        '\nTelefono: ' +
+        '\nTelefono: \n' +
         telefono +
-        '\nMotivo de la visita: ' +
+        '\nMotivo de la visita: \n' +
         motivo +
-        '\nNo. de Acompañantes: ' +
+        '\nNo. de Acompañantes: \n' +
         acompaniantes +
-        '\nNombre de quien autoriza: ' +
+        '\nNombre de quien autoriza: \n' +
         autorizacion;
     return Scaffold(
       appBar: AppBar(title: const Text('Generar')),

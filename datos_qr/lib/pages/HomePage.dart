@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: 30.0,
-          vertical: 90.0,
+          vertical: 30.0,
         ),
         children: [
           SizedBox(
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               TextField(
                   controller: _fecha,
                   decoration: InputDecoration(
-                      hintText: 'AÑO/MES/DIA',
+                      hintText: 'Fecha',
                       labelText: 'Fecha',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0)))),
@@ -77,8 +77,8 @@ class _HomePageState extends State<HomePage> {
               TextField(
                   controller: _colonia,
                   decoration: InputDecoration(
-                    hintText: 'Colonia',
-                    labelText: 'Colonia',
+                    hintText: 'Fraccionamiento',
+                    labelText: 'Fraccionamiento',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0)),
                   )),
