@@ -52,8 +52,8 @@ class _ScannerCartusState extends State<ScannerCartus> {
     PdfDocument document = PdfDocument();
     final page = document.pages.add();
     page.graphics.drawString(
-        'Propiedad de Comercializadora Cartus S.A de C.V\n'+'\n'+ qrValue,
-        PdfStandardFont(PdfFontFamily.helvetica, 25));
+        'PROPIEDAD DE\nCOMERCIALIZADORA CARTUS\nS.A DE C.V\n'+'\n'+ qrValue,
+        PdfStandardFont(PdfFontFamily.helvetica, 30));
     List<int> bytes = document.save();
     document.dispose();
     saveAndLaunchFile(bytes, 'Tiket.pdf');
