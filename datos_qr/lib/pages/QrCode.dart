@@ -7,7 +7,7 @@ class Qr_Code extends StatelessWidget {
   final String nombrevisita;
   final String calle;
   final String colonia;
-  final String lote;
+  final String lote; //
   final String telefono;
   final String motivo;
   final String acompaniantes;
@@ -46,8 +46,9 @@ class Qr_Code extends StatelessWidget {
         motivo +
         '\nNo. de Acompañantes: \n' +
         acompaniantes +
-        '\nNombre de quien autoriza: \n' +
-        autorizacion;
+        '\nAutorización: \n' +
+        autorizacion +
+        '\n---Cualquier acalaracion,se usara\neste tiket---';
     return Scaffold(
       appBar: AppBar(title: const Text('Generar')),
       body: Center(
@@ -66,6 +67,8 @@ class Qr_Code extends StatelessWidget {
             QrImage(
               data: codigo_qr,
               size: 200,
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.purpleAccent[400],
             ),
           ],
         ),

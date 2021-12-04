@@ -1,118 +1,84 @@
+import 'package:datos_qr/pages/SiginUpComplete.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
+import 'package:datos_qr/models/models2.dart';
+import 'SiginUpComplete.dart';
 
-class SignUpPage extends StatefulWidget {
+class SiginUpPage extends StatefulWidget {
+  SiginUpPage({Key key}) : super(key: key);
+
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SiginUpPageState createState() => _SiginUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController _email;
-  TextEditingController _password;
-  TextEditingController _confirmpassword;
-  final _formKey = GlobalKey<FormState>();
+class _SiginUpPageState extends State<SiginUpPage> {
+  SupabaseInsertsClients clientes = SupabaseInsertsClients();
+
+  TextEditingController _nombre = TextEditingController(text: '');
+  TextEditingController _contacto = TextEditingController(text: '');
+  TextEditingController _edad = TextEditingController(text: '');
 
   @override
   void initState() {
     super.initState();
-    _email = TextEditingController();
-    _password = TextEditingController();
-    _confirmpassword = TextEditingController();
+    _nombre = new TextEditingController();
+    _contacto = new TextEditingController();
+    _edad = new TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Form(
-      key: _formKey,
-      child: Column(
+      appBar: AppBar(title: const Text('Registro')),
+      body: ListView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 30.0,
+          vertical: 30.0,
+        ),
         children: [
-          SizedBox(
-            width: 20,
-            height: 20,
-          ),
-          SizedBox(
-            width: 20,
-            height: 20,
-          ),
-          TextFormField(
-              controller: _email,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Inserte un email correcto';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                  hintText: 'Email',
-                  labelText: 'Email',
-                  suffixIcon: Icon(Icons.verified_user),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0)))),
-          SizedBox(
-            width: 20,
-            height: 20,
-          ),
-          TextFormField(
-              controller: _password,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Inserte una contraseña valida';
-                }
-                return null;
-              },
-              enableInteractiveSelection: false,
-              obscureText: true,
-              decoration: InputDecoration(
-                  hintText: 'Password',
-                  labelText: 'Password',
-                  suffixIcon: Icon(Icons.lock_outline),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ))),
-          SizedBox(
-            width: 20,
-            height: 20,
-          ),
-          TextFormField(
-            controller: _confirmpassword,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Inserte una contraseña valida';
-                // ignore: missing_return
-              }
-              // ignore: missing_return
-              if (value != _password.text) {
-                return 'Contraseña invalida';
-              }
-              return null;
-            },
-            enableInteractiveSelection: false,
-            obscureText: true,
-            decoration: InputDecoration(
-                hintText: 'Confirm Password',
-                labelText: 'Confirm Password',
-                suffixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                )),
-          ),
-          ElevatedButton(
-            child: Text('Sing Up'),
-            onPressed: _signup,
+          Column(
+            children: [
+              TextField(
+                  controller: _nombre,
+                  decoration: InputDecoration(
+                      hintText: 'Nombre completo',
+                      labelText: 'Nombre completo',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0)))),
+              SizedBox(height: 20, width: 15),
+              TextField(
+                  controller: _contacto,
+                  decoration: InputDecoration(
+                      hintText: 'Numero de telefono',
+                      labelText: 'Numero de telefono',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0)))),
+              SizedBox(height: 20, width: 15),
+              TextField(
+                controller: _edad,
+                decoration: InputDecoration(
+                    hintText: 'Edad',
+                    labelText: 'Edad',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0))),
+              ),
+              SizedBox(height: 20, width: 15),
+              ElevatedButton(
+                  child: const Text('Siguiente'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SiginUpComplete()));
+                    clientes.addCliente(
+                        _nombre.text, _contacto.text, _edad.text);
+                    setState(() {});
+                  })
+            ],
           )
         ],
       ),
-    ));
-  }
-
-  Future _signup() async {
-    if (_formKey.currentState.validate()) {
-      await Injector.appInstance
-          .get<SupabaseClient>()
-          .auth
-          .signUp(_email.text, _password.text);
-    }
+    );
   }
 }
