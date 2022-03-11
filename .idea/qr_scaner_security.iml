@@ -26,10 +26,24 @@
       <excludeFolder url="file://$MODULE_DIR$/scannercartus/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/scannercartus/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/scannercartus/build" />
+      <excludeFolder url="file://$MODULE_DIR$/datos_qr/build" />
+      <excludeFolder url="file://$MODULE_DIR$/datos_qr/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/datos_qr/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/operaciones_crud/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/operaciones_crud/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/operaciones_crud/build" />
+      <excludeFolder url="file://$MODULE_DIR$/scanner_codigos_qr/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/scanner_codigos_qr/build" />
+      <excludeFolder url="file://$MODULE_DIR$/scanner_codigos_qr/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/create_pdf/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/create_pdf/build" />
+      <excludeFolder url="file://$MODULE_DIR$/create_pdf/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/codigo_qr_make/build" />
+      <excludeFolder url="file://$MODULE_DIR$/codigo_qr_make/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/codigo_qr_make/.pub" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
-    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>
