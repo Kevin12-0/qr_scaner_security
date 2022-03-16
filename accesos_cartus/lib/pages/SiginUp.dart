@@ -1,7 +1,5 @@
 import 'package:accesos_cartus/pages/SiginUpComplete.dart';
 import 'package:flutter/material.dart';
-import 'package:injector/injector.dart';
-import 'package:supabase/supabase.dart';
 import 'package:accesos_cartus/models/models2.dart';
 import 'SiginUpComplete.dart';
 
