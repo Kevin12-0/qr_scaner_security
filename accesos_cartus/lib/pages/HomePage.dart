@@ -51,8 +51,8 @@ class _HomePageState extends State<HomePage> {
                       labelText: 'Fecha',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0)))),
-              SizedBox(
-                height: 20,
+            SizedBox(
+              height: 20,
                 width: 15,
               ),
               TextField(
